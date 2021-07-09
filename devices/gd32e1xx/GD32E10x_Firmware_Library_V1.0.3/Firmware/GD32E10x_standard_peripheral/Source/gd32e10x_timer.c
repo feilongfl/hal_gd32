@@ -156,7 +156,11 @@ void timer_struct_para_init(timer_parameter_struct* initpara)
     \param[out] none
     \retval     none
 */
+#ifdef __ZEPHYR__
+void gd_timer_init(uint32_t timer_periph, timer_parameter_struct* initpara)
+#else
 void timer_init(uint32_t timer_periph, timer_parameter_struct* initpara)
+#endif
 {
     /* configure the counter prescaler value */
     TIMER_PSC(timer_periph) = (uint16_t)initpara->prescaler;
